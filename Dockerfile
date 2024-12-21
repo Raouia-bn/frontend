@@ -1,20 +1,21 @@
-# Utilisation d'une image officielle Node.js
-FROM node:16
+FROM node:16-alpine AS build
 
-# Définir le répertoire de travail
-WORKDIR /usr/src/app
+WORKDIR /app
 
-# Copier package.json et package-lock.json
-COPY package*.json ./
-
-# Installer les dépendances
-RUN npm install
-
-# Copier le reste des fichiers
 COPY . .
 
-# Exposer le port pour l'application frontend
-EXPOSE 3000
+RUN npm install 
 
-# Lancer le serveur de production du frontend
-CMD ["npm", "start"]
+RUN npm run build
+
+FROM nginx:alpine as prod
+
+COPY --from=build /app/build /usr/share/nginx/html
+
+RUN rm /etc/nginx/conf.d/default.conf
+
+COPY nginx/nginx.conf /etc/nginx/conf.d
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
