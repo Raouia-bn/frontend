@@ -19,7 +19,7 @@ function ItemList() {
   return (
     <div>
       <h1>Item List</h1>
-      <h2>Raouia ekhdem aman</h2>
+      <h2>**************</h2>
       <ul>
         {items.map((item) => (
           <li key={item._id}>
