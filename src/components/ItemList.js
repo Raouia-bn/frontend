@@ -18,7 +18,7 @@ function ItemList() {
 
   return (
     <div>
-      <h1>Item List</h1>
+      <h1>Item User</h1>
       <h2>**************</h2>
       <ul>
         {items.map((item) => (

@@ -16,7 +16,7 @@ function AddItem() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h1>Add Item</h1>
+      <h1>Add User</h1>
       <input
         type="text"
         placeholder="Name"
